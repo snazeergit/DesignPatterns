@@ -15,7 +15,7 @@ class SingletonBaseVersion {
 	}
 }
 
-public class SingletonMain {
+public class BasicSingletonMain {
 
 	public static void main(String[] args) {
 
