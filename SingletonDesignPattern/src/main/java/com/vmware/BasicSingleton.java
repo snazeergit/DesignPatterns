@@ -1,21 +1,21 @@
 package com.vmware;
 
-class SingletonBaseVersion {
+class Singleton {
 
-	private static SingletonBaseVersion instance;
+	private static Singleton instance;
 
-	private SingletonBaseVersion() {
+	private Singleton() {
 
 	}
 
-	public static SingletonBaseVersion getInstance() {
+	public static Singleton getInstance() {
 		if (instance == null)
-			instance = new SingletonBaseVersion();
+			instance = new Singleton();
 		return instance;
 	}
 }
 
-public class BasicSingletonMain {
+public class BasicSingleton {
 
 	public static void main(String[] args) {
 
@@ -26,9 +26,10 @@ public class BasicSingletonMain {
 		 */
 
 		// Only way to create an object
-		SingletonBaseVersion s1 = SingletonBaseVersion.getInstance();
-		SingletonBaseVersion s2 = SingletonBaseVersion.getInstance();
+		Singleton s1 = Singleton.getInstance();
+		Singleton s2 = Singleton.getInstance();
 
+		System.out.println("=======Basic Singleton===========");
 		System.out.println("Hashcode of s1 object: " + s1.hashCode());
 		System.out.println("Hashcode of s2 object: " + s2.hashCode());
 		System.out.println("Different Objects have different Hashcodes");
