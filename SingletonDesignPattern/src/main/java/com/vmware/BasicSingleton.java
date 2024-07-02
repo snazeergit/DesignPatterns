@@ -21,8 +21,8 @@ public class BasicSingleton {
 
 		// Can not create object using new keyword as it has private constructor
 		/*
-		 * SingletonBaseVersion s1 = new SingletonBaseVersion();
-		 * SingletonBaseVersion s2 = new SingletonBaseVersion();
+		 * Singleton s1 = new Singleton();
+		 * Singleton s2 = new Singleton();
 		 */
 
 		// Only way to create an object
