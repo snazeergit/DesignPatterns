@@ -44,6 +44,7 @@ public class Enum_based_Singleton {
 		Singleton2 s1 = Singleton2.getInstance();
 		System.out.println(s1.hashCode());
 
+		// trying to break Singleton using Reflection
 		Constructor<Singleton2> constructor = Singleton2.class.getDeclaredConstructor(String.class, int.class);
 		constructor.setAccessible(true);
 		/* 
@@ -52,6 +53,8 @@ public class Enum_based_Singleton {
 		 */
 		Singleton2 s2 = constructor.newInstance("NEW_INSTANCE", 1);
 		System.out.println(s2.hashCode());
+
+		// trying to break Singleton using Cloaning
 
 	}
 
