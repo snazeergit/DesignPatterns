@@ -15,7 +15,7 @@ public class ClassLoader {
 
 		System.out.println("Using ApplicationClassLoader Sub-System");
 		Singleton5 s1 = Singleton5.getInstance();
-		System.out.println(s1.hashCode());
+		System.out.println(s1.hashCode() + " -> " + s1.getClass().getClassLoader().getClass().getName());
 		System.out.println("----------");
 
 		System.out.println("Using URLClassLoader Sub-System(Independent Readymade class loader)");
@@ -35,7 +35,7 @@ public class ClassLoader {
 		Class<?> class1 = loader.loadClass("com.vmware.breaks.helper.Singleton5");
 		Method method = class1.getDeclaredMethod("getInstance", new Class[] {});
 		Object s2 = method.invoke(null);
-		System.out.println(s2.hashCode());
+		System.out.println(s2.hashCode() + " -> " + s2.getClass().getClassLoader().getClass().getName());
 		System.out.println("----------");
 
 		System.out.println("Hashcode are different: Two Objects are different");
