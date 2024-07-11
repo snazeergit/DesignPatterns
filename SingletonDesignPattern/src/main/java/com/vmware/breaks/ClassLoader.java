@@ -31,7 +31,7 @@ public class ClassLoader {
 		 * So, one object is created using ApplicationClassLoader of Class Loader Sub-System and other object is created
 		 * using URLClassLoader which is a custom class loader sub-system.
 		 */
-		URLClassLoader loader = URLClassLoader.newInstance(urlArray, null);
+		URLClassLoader loader = URLClassLoader.newInstance(urlArray, null);//not passing any Parent class loader so its null.
 		Class<?> class1 = loader.loadClass("com.vmware.breaks.helper.Singleton5");
 		Method method = class1.getDeclaredMethod("getInstance", new Class[] {});
 		Object s2 = method.invoke(null);
