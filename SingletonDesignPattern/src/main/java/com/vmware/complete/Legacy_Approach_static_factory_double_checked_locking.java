@@ -69,14 +69,17 @@ public class Legacy_Approach_static_factory_double_checked_locking implements Ru
 
 		// Singleton s1=new Singleton();
 		Singleton s1 = Singleton.getInstance();
+		System.out.println(s1.hashCode());
 
 		// Trying to break using cloning
-		Singleton s2 = (Singleton) s1.clone(); //comment this line and execute
+		Singleton s2 = (Singleton) s1.clone(); // comment this line and execute
+		System.out.println(s2.hashCode());
 
 		// Trying to break using reflection
 		Constructor<Singleton> constructor = Singleton.class.getDeclaredConstructor();
 		constructor.setAccessible(true);
-		Singleton s3 = constructor.newInstance(); //comment this line and execute
+		Singleton s3 = constructor.newInstance(); // comment this line and execute
+		System.out.println(s3.hashCode());
 
 		// Trying to break using Serialization
 		ObjectOutput out = new ObjectOutputStream(new FileOutputStream("single.txt"));
@@ -87,6 +90,7 @@ public class Legacy_Approach_static_factory_double_checked_locking implements Ru
 		ObjectInput in = new ObjectInputStream(new FileInputStream("Single.txt"));
 		Singleton s4 = (Singleton) in.readObject();
 		in.close();
+		System.out.println(s4.hashCode());
 
 		Legacy_Approach_static_factory_double_checked_locking runnable = new Legacy_Approach_static_factory_double_checked_locking();
 		Thread t1 = new Thread(runnable);
@@ -99,8 +103,8 @@ public class Legacy_Approach_static_factory_double_checked_locking implements Ru
 
 	@Override
 	public void run() {
-		Singleton instance = Singleton.getInstance();
-		System.out.println(instance.hashCode());
+		Singleton s5 = Singleton.getInstance();
+		System.out.println(s5.hashCode());
 
 	}
 }

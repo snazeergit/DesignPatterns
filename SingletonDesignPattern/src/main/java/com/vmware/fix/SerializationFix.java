@@ -12,6 +12,8 @@ import java.io.ObjectStreamException;
 import java.io.Serializable;
 
 class Singleton1 implements Serializable {
+	
+	private static final long serialVersionUID = 1L;
 	private static Singleton1 INSTANCE = null;
 
 	private Singleton1() {
