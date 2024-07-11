@@ -1,4 +1,4 @@
-package com.vmware.semi.complete;
+package com.vmware.complete;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -12,7 +12,20 @@ import java.io.Serializable;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 
+/*
+ * This class fix for preventing Singleton breakage using MutliThreading, Cloning, Serialization and Reflection API. 
+ */
+
+/*
+ * It is recommended to add SerialVersionUID to every Serializable class so we will not get
+ * InvalidClassException during Deserialization process even though the class structure is 
+ * changed.
+ */
+
 class Singleton implements Serializable, Cloneable {
+	// To avoid InvalidClassException even though the class structure is changed at
+	// the time of Deserialization
+	private static final long serialVersionUID = 1L;
 
 	// volatile to make the threads to have access to latest value of INSTANCE
 	private static volatile Singleton INSTANCE = null;
@@ -48,7 +61,7 @@ class Singleton implements Serializable, Cloneable {
 	}
 }
 
-public class Singleton_Fix_Reflection_Clone_Serialization {
+public class Legacy_Approach_static_factory_double_checked_locking implements Runnable {
 
 	public static void main(String[] args) throws CloneNotSupportedException, NoSuchMethodException, SecurityException,
 			InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException,
@@ -58,12 +71,12 @@ public class Singleton_Fix_Reflection_Clone_Serialization {
 		Singleton s1 = Singleton.getInstance();
 
 		// Trying to break using cloning
-		Singleton s2 = (Singleton) s1.clone();
+		Singleton s2 = (Singleton) s1.clone(); //comment this line and execute
 
 		// Trying to break using reflection
 		Constructor<Singleton> constructor = Singleton.class.getDeclaredConstructor();
 		constructor.setAccessible(true);
-		Singleton s3 = constructor.newInstance();
+		Singleton s3 = constructor.newInstance(); //comment this line and execute
 
 		// Trying to break using Serialization
 		ObjectOutput out = new ObjectOutputStream(new FileOutputStream("single.txt"));
@@ -74,6 +87,20 @@ public class Singleton_Fix_Reflection_Clone_Serialization {
 		ObjectInput in = new ObjectInputStream(new FileInputStream("Single.txt"));
 		Singleton s4 = (Singleton) in.readObject();
 		in.close();
+
+		Legacy_Approach_static_factory_double_checked_locking runnable = new Legacy_Approach_static_factory_double_checked_locking();
+		Thread t1 = new Thread(runnable);
+		Thread t2 = new Thread(runnable);
+		Thread t3 = new Thread(runnable);
+		t1.start();
+		t2.start();
+		t3.start();
+	}
+
+	@Override
+	public void run() {
+		Singleton instance = Singleton.getInstance();
+		System.out.println(instance.hashCode());
 
 	}
 }
