@@ -7,9 +7,8 @@ public class ClientApp_2 {
 	public static void main(String[] args) {
 		System.out.println("ClientApp_2.main()");
 
-		ICar budgetCar = CarFactory.createCar("budget");
-		budgetCar.assemble();
-		budgetCar.roadTest();
-		budgetCar.drive();
-	}
+		ICar car = CarFactory.createCar("budget");
+		car.assemble();
+		car.roadTest();
+		car.drive();	}
 }
